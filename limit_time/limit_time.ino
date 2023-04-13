@@ -2,8 +2,6 @@ const int motor_A1 = 5;
 const int motor_A2 = 6;
 const int motor_B1 = 9;
 const int motor_B2 = 10;
-const int but_1 = 3;
-const int but_2 = 4;
 const int IR_R = A1;
 const int IR_M = A3;
 const int IR_L = A5;
@@ -22,8 +20,6 @@ void setup() {
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
-  pinMode(but_1, INPUT);
-  pinMode(but_2, INPUT);
   Serial.begin(9600);
   Serial.print("Start");
 }
