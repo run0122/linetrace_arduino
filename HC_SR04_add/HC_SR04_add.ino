@@ -24,9 +24,8 @@ void setup() {
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
-  //Serial.begin(9600);
-  //Serial.print("Start");
-}
+  Serial.begin(9600);
+  }
 
 
 void loop() {
@@ -42,47 +41,49 @@ void loop() {
 
   duration = pulseIn(echoPin, HIGH);
   distance = (duration*.0343)/2;
-  //Serial.print("Distance: ");
-  //Serial.println(distance);
+  Serial.print("Distance: ");
+  Serial.println(distance);
   delay(100);
-  if(distance > 15 && distance < 1023){
-    if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 0) {
-      //Serial.println(" 직진 ");
-      forward();
-      //delay(100);
-    }
-    else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0) {
-      //Serial.println(" 좌회전 ");
-      left ();
-      //delay(100);
-    }
-    else if (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) {
-      //Serial.println(" 좌회전 ");
-      left ();
-      //delay(100);
-    }
-    else if (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 1) {
-      //Serial.println(" 우회전 ");
-      right ();
-      //delay(100);
-    }
-    else if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) {
-      //Serial.println(" 우회전 ");
-      right ();
-      //delay(100);
-    }
-
-    else if (IR_L_data == 1 and IR_M_data == 1  and IR_R_data == 1) {
-      //Serial.println(" 정지 ");
-      stop();
-      //delay(100);
-    }
-  }
   if(distance > 0 && distance < 15){
+      Serial.println(" 오른쪽 뒤 ");
       rightback ();
       delay(3000);
       stop();
-      }
+  }
+  else if(distance > 15 && distance < 1023){
+    if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 0) {
+      Serial.println(" 직진 ");
+      forward();
+      delay(15);
+    }
+    else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0) {
+      Serial.println(" 좌회전 ");
+      left ();
+      delay(15);
+    }
+    else if (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) {
+      Serial.println(" 좌회전 ");
+      left ();
+      delay(15);
+    }
+    else if (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 1) {
+      Serial.println(" 우회전 ");
+      right ();
+      delay(15);
+    }
+    else if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) {
+      Serial.println(" 우회전 ");
+      right ();
+      delay(15);
+    }
+
+    else if (IR_L_data == 1 and IR_M_data == 1  and IR_R_data == 1) {
+      Serial.println(" 정지 ");
+      stop();
+      delay(15);
+    }
+  }
+  
 }
 
 
