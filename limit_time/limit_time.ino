@@ -34,7 +34,7 @@ void loop() {
   IR_L_data = digitalRead(IR_L);
   IR_M_data = digitalRead(IR_M);
   IR_R_data = digitalRead(IR_R);
-  if (Timer_move + 30000 > millis()){
+  if (Timer_move + 35000 > millis()){
     //Timer = millis();
     if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 0) {
     Serial.println(" 직진 ");
@@ -67,7 +67,7 @@ void loop() {
       stop();
       delay(100);
     }
-  }else if(Timer_move + 30000 < millis()){
+  }else if(Timer_move + 35000 < millis()){
     //Timer = millis();
     Timer_move = 0;
     stop();
