@@ -25,52 +25,29 @@ void setup() {
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
-  Serial.begin(9600);
-  Serial.print("Start");
 }
 
 
 void loop() {
-  //IR 센서 값을 읽어 출력해주는 코드
   IR_L_data = digitalRead(IR_L);
   IR_M_data = digitalRead(IR_M);
   IR_R_data = digitalRead(IR_R);
 
   if (Timer_move + 10000 > millis()){
     if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 0) {
-    Serial.println(" 직진 ");
     forward();
-    delay(100);
     }
     else if (IR_L_data == 1 and IR_M_data == 0 and IR_R_data == 0) {
-      Serial.println(" 좌회전 ");
       left ();
-      delay(100);
     }
-    // else if (IR_L_data == 1 and IR_M_data == 1 and IR_R_data == 0) {
-    //   Serial.println(" 좌회전 ");
-    //   left ();
-    //   delay(100);
-    // }
     else if (IR_L_data == 0 and IR_M_data == 0 and IR_R_data == 1) {
-      Serial.println(" 우회전 ");
       right ();
-      delay(100);
     }
-    // else if (IR_L_data == 0 and IR_M_data == 1 and IR_R_data == 1) {
-    //   Serial.println(" 우회전 ");
-    //   right ();
-    //   delay(100);
-    // }
-
     else if (IR_L_data == 1 and IR_M_data == 1  and IR_R_data == 1) {
-      Serial.println(" 정지 ");
       stop();
-      delay(100);
     }
   }else if(Timer_move + 10000 < millis()){
-    rightback ();
-    //Timer_move = 0;
+    stop();
     digitalWrite(trigPin, LOW);
     delayMicroseconds(2);
     digitalWrite(trigPin, HIGH);
@@ -79,19 +56,17 @@ void loop() {
 
     duration = pulseIn(echoPin, HIGH);
     distance = (duration*.0343)/2;
-    //Serial.print("Distance: ");
-    //Serial.println(distance);
-    delay(100);
-    if(distance > 10 && distance < 30){
-      //Timer_move = 0;
+     delay(1000);
+    if(distance > 15 && distance < 40){
       backward();
-      delay(500);
       stop();
-    }else if(distance > 0 && distance < 10){
+    }else if(distance > 0 && distance < 15){
       Timer_move = 0;
       stop();
+    }else{
+      rightback ();
     }
-    //Timer_move = 0;
+    Timer_move = 0;
   }
 
 }
@@ -102,19 +77,19 @@ void right () {
   digitalWrite(motor_A1, HIGH);
   digitalWrite(motor_A2, LOW);
   digitalWrite(motor_B1, LOW);
-  analogWrite(motor_B2, 150);
+  digitalWrite(motor_B2, LOW);
 }
 void rightback () {
   //우로 후진
   digitalWrite(motor_A1, LOW);
-  digitalWrite(motor_A2, HIGH);
-  digitalWrite(motor_B1, HIGH);
+  analogWrite(motor_A2, 100);
+  analogWrite(motor_B1, 100);
   digitalWrite(motor_B2, LOW);
 }
 void left() {
   //좌
   digitalWrite(motor_A1, LOW);
-  analogWrite(motor_A2, 150);
+  digitalWrite(motor_A2, LOW);
   digitalWrite(motor_B1, HIGH);
   digitalWrite(motor_B2, LOW);
 }
@@ -130,9 +105,9 @@ void forward() {
 void backward() {
   //후진
   digitalWrite(motor_A1, LOW);
-  analogWrite(motor_A2, 150);
+  analogWrite(motor_A2, 100);
   digitalWrite(motor_B1, LOW);
-  analogWrite(motor_B2, 150);
+  analogWrite(motor_B2, 100);
 }
 
 void stop() {
