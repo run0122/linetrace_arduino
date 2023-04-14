@@ -71,8 +71,10 @@ void loop() {
   distance = (duration*.0343)/2;
   delay(50);// 딜레이값으로 인해 동작의 속도 변화
 
-  int position = map(distance, 0, 150, 0, 10);
-  switch(position){
+  int position = map(distance, 0, 1023, 0, 150);
+  int lange = map(position, 0, 150, 0, 10);
+  
+  switch(lange){
     case 0:
     stop();
     //backward();
