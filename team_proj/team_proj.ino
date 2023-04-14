@@ -4,6 +4,7 @@ const int motor_B1 = 9;
 const int motor_B2 = 10;
 const int trigPin = 3;
 const int echoPin = 11;
+const int buzzer = 7;
 const int IR_R = A1;
 const int IR_M = A3;
 const int IR_L = A5;
@@ -22,6 +23,7 @@ void setup() {
   pinMode(motor_B2, OUTPUT);
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
+  pinMode(buzzer, OUTPUT);
   pinMode(IR_L, INPUT);
   pinMode(IR_M, INPUT);
   pinMode(IR_R, INPUT);
@@ -57,14 +59,51 @@ void loop() {
     duration = pulseIn(echoPin, HIGH);
     distance = (duration*.0343)/2;
      delay(1000);
-    if(distance > 15 && distance < 40){
-      backward();
+    if (distance > 60 && distance <= 70) {
+    backward();
+    delay(15);
+    tone(buzzer, 523, 1000/8);
+    delay(1000 / 2*1.30);
+    noTone(buzzer);
+    }
+    else if (distance > 50 && distance <= 60) {
+      backward_60();
+      delay(15);
+      tone(buzzer, 740, 1000/8);
+      delay(1000 / 4*1.30);
+      noTone(buzzer);
+    
+    }
+    else if (distance > 40 && distance <= 50) {
+      backward_50();
+      delay(15);
+      tone(buzzer, 880, 1000 / 8);
+      delay(1000 / 8*1.30);
+      noTone(buzzer);
+    }
+    else if (distance > 30 && distance <= 40) {
+      backward_40();
+      delay(15);
+      tone(buzzer, 1109, 1000 / 8);
+      delay(1000 / 16*1.30);
+      noTone(buzzer);
+    }
+    else if (distance > 20 && distance <= 30) {
+      backward_30();
+      delay(15);
+      tone(buzzer, 1568, 1000/8);
+      delay(1000 / 32*1.30);
+      noTone(buzzer);
+    }
+    else if (distance > 10 && distance <= 20) {
+      backward_20();
+      delay(15);
+      tone(buzzer, 1760, 1000 / 8);
+      delay(1000 / 64 * 1.30);
+      noTone(buzzer);
+    }
+    else if (distance <= 10) {
       stop();
-    }else if(distance > 0 && distance < 15){
-      Timer_move = 0;
-      stop();
-    }else{
-      rightback ();
     }
     Timer_move = 0;
   }
@@ -115,4 +154,74 @@ void stop() {
   digitalWrite(motor_A2, LOW);
   digitalWrite(motor_B1, LOW);
   digitalWrite(motor_B2, LOW);
+}
+void backward_70() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 150);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 150);
+}
+
+void backward_60() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 150);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 150);
+}
+
+void backward_50() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 130);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 130);
+}
+void backward_40() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 100);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 100);
+}
+
+void backward_30() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 80);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 80);
+}
+
+void backward_20() {
+  //후진
+  digitalWrite(motor_A1, LOW);
+  digitalWrite(motor_A2, HIGH);
+  analogWrite(motor_A1, 0);
+  analogWrite(motor_A2, 60);
+  digitalWrite(motor_B1, LOW);
+  digitalWrite(motor_B2, HIGH);
+  analogWrite(motor_B1, 0);
+  analogWrite(motor_B2, 60);
 }
