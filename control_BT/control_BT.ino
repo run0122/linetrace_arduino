@@ -22,7 +22,7 @@ void setup(){
 
 void loop(){
   if (btSerial.available()){
-    command = btSerial.read();
+    char command = btSerial.read();
     switch(command){
       case 'w': // 전진
         forward();
