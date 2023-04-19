@@ -1,8 +1,6 @@
 #include <SoftwareSerial.h>
 
-int blueTx = 12;
-int blueRx = 13;
-SoftwareSerial btSerial(blueTx, blueRx);
+SoftwareSerial btSerial(2,3);
 
 int motor_A1 = 5;
 int motor_A2 = 6;
