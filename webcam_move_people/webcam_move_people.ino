@@ -16,30 +16,51 @@ void loop() {
     char input = Serial.read();
 
     if (input == 'F') {
-      digitalWrite(in1, HIGH);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, HIGH);
-      digitalWrite(in4, LOW);
+      forward();
     } else if (input == 'B') {
-      digitalWrite(in1, LOW);
-      digitalWrite(in2, HIGH);
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, HIGH);
+      backward();
     } else if (input == 'L') {
-      digitalWrite(in1, LOW);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, HIGH);
-      digitalWrite(in4, LOW);
+      left();
     } else if (input == 'R') {
-      digitalWrite(in1, HIGH);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, LOW);
+      right();
     } else {
-      digitalWrite(in1, LOW);
-      digitalWrite(in2, LOW);
-      digitalWrite(in3, LOW);
-      digitalWrite(in4, LOW);
+      stop();
     }
   }
+}
+
+void forward() {
+  delay(15);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+void backward() {
+  delay(15);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, HIGH);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, HIGH);
+}
+void left() {
+  delay(15);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, HIGH);
+  digitalWrite(in4, LOW);
+}
+void right() {
+  delay(15);
+  digitalWrite(in1, HIGH);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
+}
+void stop() {
+  delay(15);
+  digitalWrite(in1, LOW);
+  digitalWrite(in2, LOW);
+  digitalWrite(in3, LOW);
+  digitalWrite(in4, LOW);
 }
