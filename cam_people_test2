@@ -46,7 +46,7 @@ while True:
         # 중심점 정보 시리얼 통신으로 전송하기
         if avg_cx < 160:
             ser.write(b'R')
-        elif avg_cx > 360:
+        elif avg_cx > 480:
             ser.write(b'L')
         else:
             ser.write(b'F')
