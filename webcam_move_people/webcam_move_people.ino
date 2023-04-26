@@ -19,7 +19,7 @@ void loop() {
       forward();
     } else if (input == 'B') {
       backward();
-    } else if (inputr == 'ML'){
+    } else if (input == 'ML'){
       left();
       delay(500);
       forward();
@@ -28,7 +28,7 @@ void loop() {
       delay(500);
     } else if (input == 'L') {
       left();
-    } else if (inputr == 'MR'){
+    } else if (input == 'MR'){
       right();
       delay(500);
       forward();
