@@ -17,26 +17,20 @@ void loop() {
 
     if (input == 'F') {
       forward();
+      delay(20);
+      stop();
     } else if (input == 'B') {
       backward();
-    } else if (input == 'ML'){
-      left();
-      delay(500);
-      forward();
-      delay(500);
-      right();
-      delay(500);
+      delay(20);
+      stop();
     } else if (input == 'L') {
       left();
-    } else if (input == 'MR'){
-      right();
-      delay(500);
-      forward();
-      delay(500);
-      left();
-      delay(500);
+      delay(20);
+      stop();
     }else if (input == 'R') {
       right();
+      delay(20);
+      stop();
     } else {
       stop();
     }
