@@ -17,19 +17,19 @@ void loop() {
 
     if (input == 'F') {
       forward();
-      delay(20);
+      delay(50);
       stop();
     } else if (input == 'B') {
       backward();
-      delay(20);
+      delay(50);
       stop();
     } else if (input == 'L') {
       left();
-      delay(20);
+      delay(50);
       stop();
     }else if (input == 'R') {
       right();
-      delay(20);
+      delay(50);
       stop();
     } else {
       stop();
