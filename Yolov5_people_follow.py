@@ -60,30 +60,35 @@ while True:
     height, width, channels = frame.shape
 
     # 하단부 중앙 1/2 영역 추출하기
-    crop_width = int(width / 4)
+    crop_width = int(width * 2 / 3)  # 가로 크기를 2배로 늘림
     crop_height = int(height / 2)
-    start_x = int(width / 2) - crop_width
+    start_x = int(width / 6)  # 중앙 위치로 조정
     start_y = int(height / 2)
-    end_x = int(width / 2) + crop_width
+    end_x = start_x + crop_width
     end_y = height
+
+    # 이미지 경계를 벗어나는 값을 사용하지 않도록 주의해야 합니다.
+    if end_x > width:
+        end_x = width
+
     cropped_frame = frame[start_y:end_y, start_x:end_x]
 
     # 그레이스케일 이미지로 변환하기
     gray = cv2.cvtColor(cropped_frame, cv2.COLOR_BGR2GRAY)
 
     # 이미지 이진화하기
-    _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
+    _, thresh = cv2.threshold(gray, 75, 255, cv2.THRESH_BINARY_INV)
 
     # 컨투어 찾기
-    contours, _ = cv2.findContours(
-        thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-
+    # contours, _ = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     # 컨투어 중 가장 큰 영역 찾기
     max_area = 0
+    min_contour_area = 8000
     max_contour = None
     for contour in contours:
         area = cv2.contourArea(contour)
-        if area > max_area:
+        if area > max_area and area > min_contour_area:
             max_area = area
             max_contour = contour
 
@@ -98,9 +103,9 @@ while True:
             cv2.circle(thresh, (cx, cy), 5, (0, 0, 255), -1)
 
             # 중심점 정보 시리얼 통신으로 전송하기
-            if cx < 160:
+            if cx < 150:
                 ser.write(b'L')
-            elif cx > 480:
+            elif cx > 290:
                 ser.write(b'R')
 
             else:
